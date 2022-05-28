@@ -41,3 +41,17 @@ export async function validateUniqueGame(req, res, next) {
 
   next()
 }
+
+export async function setQueryTextandValues(req, res, next) {
+  const { name } = req.query
+
+  const text = `SELECT games.*, categories.name as categoryName
+  FROM categories 
+  JOIN games ON games."categoryId" = categories.id
+  WHERE games.name ILIKE $1
+  `
+  const values = [name ? `%${name}%` : "%"]
+
+  res.locals.queryObject = { text, values }
+  next()
+}
