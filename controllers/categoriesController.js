@@ -2,22 +2,23 @@ import db from "./../db.js"
 
 export async function getCategories(req, res) {
   const result = await db.query(`SELECT * FROM categories`)
-  console.log(result)
 
   res.send(result.rows)
 }
 
 export async function postNewCategory(req, res) {
+  const { name } = req.body
   try {
     const result = await db.query(
       `INSERT INTO categories (name) 
-        VALUES ('${req.body.name}')`,
+        VALUES ($1)`,
+      [name],
     )
-
-    console.log({ result })
-
-    res.send(201)
+    res.sendStatus(201)
   } catch (err) {
-    res.send(err)
+    if (err.code === "23505") {
+      return res.sendStatus(409)
+    }
+    res.sendStatus(500)
   }
 }
