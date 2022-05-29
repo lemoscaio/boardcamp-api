@@ -23,7 +23,7 @@ export async function validateUniqueCategory(req, res, next) {
     FROM categories 
     WHERE name = '${req.body.name}'
     `)
-    if (result.rows[0]) {
+    if (result.rowCount > 0) {
       return res.sendStatus(409)
     }
   } catch (error) {

@@ -32,7 +32,7 @@ export async function validateUniqueGame(req, res, next) {
     FROM games 
     WHERE name = '${name}'
     `)
-    if (result.rows[0]) {
+    if (result.rowCount > 0) {
       return res.sendStatus(409)
     }
   } catch (error) {
@@ -42,7 +42,7 @@ export async function validateUniqueGame(req, res, next) {
   next()
 }
 
-export async function setQueryTextandValues(req, res, next) {
+export async function setSearchQueryObject(req, res, next) {
   const { name } = req.query
 
   const text = `SELECT games.*, categories.name as categoryName

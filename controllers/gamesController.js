@@ -16,9 +16,8 @@ export async function postNewGame(req, res) {
     )
     res.sendStatus(201)
   } catch (err) {
-    if (err.code === "23505") {
-      return res.sendStatus(409)
-    }
+    if (err.code === "23505") return res.sendStatus(409)
+
     res.sendStatus(500)
   }
 }
