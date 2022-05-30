@@ -24,6 +24,9 @@ function formatRentalData(rawData) {
     }
 
     primaryData.rentDate = primaryData.rentDate.toISOString().slice(0, 10)
+    if (returnDate) {
+      primaryData.returnDate = primaryData.rentDate.toISOString().slice(0, 10)
+    }
 
     return { ...primaryData, customer, game }
   })
