@@ -21,7 +21,8 @@ export async function getCustomerById(req, res) {
 
     res.send(result.rows)
   } catch (error) {
-    res.sendStatus(500)
+    // res.sendStatus(500)
+    res.status(500).send(error)
   }
 }
 
