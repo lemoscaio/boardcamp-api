@@ -43,11 +43,11 @@ export async function setSearchQueryObject(req, res, next) {
   const values = []
 
   if (cpf) {
-    where = "WHERE cpf ILIKE $1"
+    where = "WHERE customers.cpf ILIKE $1"
     values.push(`%${cpf}%`)
   }
   if (id) {
-    where = "WHERE id = $1"
+    where = "WHERE customers.id = $1"
     values.push(id)
   }
   if (cpf && id) {

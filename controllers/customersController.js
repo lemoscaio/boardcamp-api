@@ -13,6 +13,7 @@ export async function getCustomers(req, res) {
 
 export async function getCustomerById(req, res) {
   const { queryObject } = res.locals
+  console.log("🚀 ~ queryObject", queryObject)
 
   try {
     const result = await db.query(queryObject)
@@ -21,8 +22,7 @@ export async function getCustomerById(req, res) {
 
     res.send(result.rows)
   } catch (error) {
-    // res.sendStatus(500)
-    res.status(500).send(error)
+    res.sendStatus(500)
   }
 }
 
