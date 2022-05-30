@@ -24,7 +24,12 @@ customersRouter.get(
   setSearchQueryObject,
   getCustomers,
 )
-customersRouter.get("/customers/:id", setSearchQueryObject, getCustomerById)
+customersRouter.get(
+  "/customers/:id",
+  setQueryOptionsFromQueryStrings,
+  setSearchQueryObject,
+  getCustomerById,
+)
 customersRouter.post(
   "/customers",
   validateCustomerData,
