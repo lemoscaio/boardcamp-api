@@ -4,7 +4,7 @@ import {
   validateUniqueCategory,
 } from "./../middlewares/categoriesMiddleware.js"
 
-import { setOrderQuery } from "../middlewares/commonMiddlewares.js"
+import { setQueryOptionsFromQueryStrings } from "../middlewares/commonMiddlewares.js"
 
 import {
   getCategories,
@@ -13,7 +13,11 @@ import {
 
 const categoriesRouter = Router()
 
-categoriesRouter.get("/categories", setOrderQuery, getCategories)
+categoriesRouter.get(
+  "/categories",
+  setQueryOptionsFromQueryStrings,
+  getCategories,
+)
 categoriesRouter.post(
   "/categories",
   validateCategoryData,

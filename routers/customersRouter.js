@@ -7,7 +7,7 @@ import {
   setUpdateQueryObject,
 } from "../middlewares/customersMiddleware.js"
 
-import { setOrderQuery } from "../middlewares/commonMiddlewares.js"
+import { setQueryOptionsFromQueryStrings } from "../middlewares/commonMiddlewares.js"
 
 import {
   getCustomers,
@@ -20,7 +20,7 @@ const customersRouter = Router()
 
 customersRouter.get(
   "/customers",
-  setOrderQuery,
+  setQueryOptionsFromQueryStrings,
   setSearchQueryObject,
   getCustomers,
 )

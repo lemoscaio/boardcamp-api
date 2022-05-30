@@ -1,12 +1,13 @@
 import db from "./../db.js"
 
 export async function getCategories(req, res) {
-  const { orderQuery } = res.locals
+  const { queryOptions } = res.locals
 
   const text = `SELECT * 
   FROM categories 
-  ${orderQuery}`
+  ${queryOptions}`
 
+  console.log("🚀 ~ text", text)
   try {
     const result = await db.query(text)
 

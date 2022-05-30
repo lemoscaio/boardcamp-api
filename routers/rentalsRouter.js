@@ -7,7 +7,7 @@ import {
   validateExistingRental,
 } from "../middlewares/rentalsMiddleware.js"
 
-import { setOrderQuery } from "../middlewares/commonMiddlewares.js"
+import { setQueryOptionsFromQueryStrings } from "../middlewares/commonMiddlewares.js"
 
 import {
   getRentals,
@@ -18,7 +18,12 @@ import {
 
 const rentalsRouter = Router()
 
-rentalsRouter.get("/rentals", setOrderQuery, setSearchQueryObject, getRentals)
+rentalsRouter.get(
+  "/rentals",
+  setQueryOptionsFromQueryStrings,
+  setSearchQueryObject,
+  getRentals,
+)
 rentalsRouter.post(
   "/rentals",
   validateRentalData,

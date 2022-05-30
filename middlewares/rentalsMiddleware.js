@@ -54,7 +54,7 @@ export async function validateExistingCostumerAndGame(req, res, next) {
 export async function setSearchQueryObject(req, res, next) {
   const { customerId, gameId } = req.query
 
-  const { orderQuery } = res.locals
+  const { queryOptions } = res.locals
 
   let where = ""
   const values = []
@@ -84,10 +84,11 @@ export async function setSearchQueryObject(req, res, next) {
   JOIN games on rentals."gameId" = games.id
   JOIN categories on games."categoryId" = categories.id
   ${where} 
-  ${orderQuery}
+  ${queryOptions}
   `
 
   res.locals.queryObject = { text, values }
+  console.log("🚀 ~ res.locals.queryObject", res.locals.queryObject)
 
   next()
 }
