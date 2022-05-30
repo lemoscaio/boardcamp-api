@@ -54,9 +54,12 @@ export async function setSearchQueryObject(req, res, next) {
     return res.sendStatus(400)
   }
 
-  const text = `SELECT *
+  const text = `SELECT customers.*,
+  count(rentals."rentDate") as "rentalsCount"
   FROM customers
+  LEFT JOIN rentals on rentals."customerId" = customers.id
   ${where}
+  GROUP BY customers.id
   ${queryOptions}
   `
 

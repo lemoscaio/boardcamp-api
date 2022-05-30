@@ -53,7 +53,7 @@ export async function setSearchQueryObject(req, res, next) {
   count(rentals."rentDate") as "rentalsCount"
   FROM categories 
   JOIN games ON games."categoryId" = categories.id
-  JOIN rentals on rentals."gameId" = games.id
+  LEFT JOIN rentals on rentals."gameId" = games.id
   WHERE games.name ILIKE $1
   group by games.id, categories.name
   ${queryOptions}
