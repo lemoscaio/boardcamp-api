@@ -2,8 +2,12 @@ import db from "../db.js"
 
 export async function getGames(req, res) {
   const { queryObject } = res.locals
-  const result = await db.query(queryObject)
-  res.send(result.rows)
+  try {
+    const result = await db.query(queryObject)
+    res.send(result.rows)
+  } catch (error) {
+    res.sendStatus(500)
+  }
 }
 
 export async function postNewGame(req, res) {
