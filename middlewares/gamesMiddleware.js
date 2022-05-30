@@ -5,7 +5,7 @@ export async function validateGameData(req, res, next) {
   try {
     await newGameSchema.validateAsync(req.body)
   } catch (error) {
-    return res.status(900).send(error)
+    return res.sendStatus(400)
   }
 
   next()
@@ -19,9 +19,7 @@ export async function validateUniqueGame(req, res, next) {
     FROM categories 
     WHERE id = ${categoryId}
     `)
-    if (result.rowCount === 0) {
-      return res.status(400).send(result)
-    }
+    if (result.rowCount === 0) return res.sendStatus(400)
   } catch (error) {
     return res.sendStatus(500)
   }
