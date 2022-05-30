@@ -36,11 +36,15 @@ function getTodayInStringYYYYMMDD() {
 export async function getRentals(req, res) {
   const { queryObject } = res.locals
 
-  const result = await db.query(queryObject)
+  try {
+    const result = await db.query(queryObject)
 
-  const formattedData = formatRentalData(result.rows)
+    const formattedData = formatRentalData(result.rows)
 
-  res.send(formattedData)
+    res.send(formattedData)
+  } catch (err) {
+    res.sendStatus(500)
+  }
 }
 
 export async function postNewRental(req, res) {
@@ -91,6 +95,7 @@ export async function deleteRental(req, res) {
     const result = await db.query(`DELETE FROM rentals WHERE id = $1`, [id])
     console.log(result)
 
+    if (result.rowCount === 0) return res.sendStatus(404)
     res.sendStatus(200)
   } catch (err) {
     console.log(err)

@@ -38,7 +38,9 @@ export async function setSearchQueryObject(req, res, next) {
   const { cpf } = req.query
   const { id } = req.params
 
-  let where
+  const { orderQuery } = res.locals
+
+  let where = ""
   const values = []
 
   if (cpf) {
@@ -56,9 +58,11 @@ export async function setSearchQueryObject(req, res, next) {
   const text = `SELECT *
   FROM customers
   ${where}
+  ${orderQuery}
   `
 
   res.locals.queryObject = { text, values }
+
   next()
 }
 
@@ -92,7 +96,6 @@ export async function validateCpfConflictOnUpdate(req, res, next) {
     `,
       [cpf, id],
     )
-    console.log("🚀 ~ result", result)
     if (result.rowCount > 0) {
       return res.sendStatus(409)
     }

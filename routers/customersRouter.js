@@ -7,6 +7,8 @@ import {
   setUpdateQueryObject,
 } from "../middlewares/customersMiddleware.js"
 
+import { setOrderQuery } from "../middlewares/commonMiddlewares.js"
+
 import {
   getCustomers,
   getCustomerById,
@@ -16,7 +18,12 @@ import {
 
 const customersRouter = Router()
 
-customersRouter.get("/customers", setSearchQueryObject, getCustomers)
+customersRouter.get(
+  "/customers",
+  setOrderQuery,
+  setSearchQueryObject,
+  getCustomers,
+)
 customersRouter.get("/customers/:id", setSearchQueryObject, getCustomerById)
 customersRouter.post(
   "/customers",

@@ -1,9 +1,19 @@
 import db from "./../db.js"
 
 export async function getCategories(req, res) {
-  const result = await db.query(`SELECT * FROM categories`)
+  const { orderQuery } = res.locals
 
-  res.send(result.rows)
+  const text = `SELECT * 
+  FROM categories 
+  ${orderQuery}`
+
+  try {
+    const result = await db.query(text)
+
+    res.send(result.rows)
+  } catch (error) {
+    res.sendStatus(500)
+  }
 }
 
 export async function postNewCategory(req, res) {
