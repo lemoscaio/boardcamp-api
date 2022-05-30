@@ -43,6 +43,7 @@ export async function getRentals(req, res) {
 
     res.send(formattedData)
   } catch (err) {
+    console.log("err", err)
     res.sendStatus(500)
   }
 }

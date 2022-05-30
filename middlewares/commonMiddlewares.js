@@ -4,6 +4,7 @@ export async function setQueryOptionsFromQueryStrings(req, res, next) {
     setQueryOptionsFromQueryStrings,
   )
   const { order, desc, offset, limit } = req.query
+  console.log("🚀 ~ limit", limit)
 
   let orderQuery = ""
   let orderDirection = desc ? "DESC" : "ASC"
@@ -26,9 +27,8 @@ export async function setQueryOptionsFromQueryStrings(req, res, next) {
   ${offsetQuery}
   ${limitQuery}
   `
-  console.log("🚀 ~ queryOptions", queryOptions)
 
   res.locals.queryOptions = queryOptions
-  console.log("🚀 ~ res.locals.orderQuery", res.locals.orderQuery)
+  console.log("🚀 ~ res.locals.queryOptions", res.locals.queryOptions)
   next()
 }
