@@ -23,7 +23,6 @@ export async function validateUniqueCostumer(req, res, next) {
     `,
       [cpf],
     )
-    console.log("🚀 ~ result", result)
     if (result.rowCount > 0) {
       return res.sendStatus(409)
     }
@@ -60,7 +59,6 @@ export async function setSearchQueryObject(req, res, next) {
   ${where}
   ${queryOptions}
   `
-  console.log("🚀 ~ text", text)
 
   res.locals.queryObject = { text, values }
 

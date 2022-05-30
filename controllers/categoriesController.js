@@ -7,7 +7,6 @@ export async function getCategories(req, res) {
   FROM categories 
   ${queryOptions}`
 
-  console.log("🚀 ~ text", text)
   try {
     const result = await db.query(text)
 

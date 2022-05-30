@@ -47,15 +47,19 @@ export async function setSearchQueryObject(req, res, next) {
 
   const { queryOptions } = res.locals
 
-  const text = `SELECT games.*, categories.name as categoryName
+  const text = `SELECT 
+  games.*, 
+  categories.name as categoryName, 
+  count(rentals."rentDate") as "rentalsCount"
   FROM categories 
   JOIN games ON games."categoryId" = categories.id
+  JOIN rentals on rentals."gameId" = games.id
   WHERE games.name ILIKE $1
+  group by games.id, categories.name
   ${queryOptions}
   `
   const values = [name ? `%${name}%` : "%"]
 
   res.locals.queryObject = { text, values }
-  console.log("🚀 ~ res.locals.queryObject", res.locals.queryObject)
   next()
 }

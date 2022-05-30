@@ -96,7 +96,6 @@ export async function setSearchQueryObject(req, res, next) {
   `
 
   res.locals.queryObject = { text, values }
-  console.log("🚀 ~ res.locals.queryObject", res.locals.queryObject)
 
   next()
 }

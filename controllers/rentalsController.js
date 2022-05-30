@@ -43,7 +43,6 @@ export async function getRentals(req, res) {
 
     res.send(formattedData)
   } catch (err) {
-    console.log("err", err)
     res.sendStatus(500)
   }
 }
@@ -73,7 +72,6 @@ export async function postNewRental(req, res) {
 export async function setRentalAsFinished(req, res) {
   const { id } = req.params
   let returnDate = getTodayInStringYYYYMMDD()
-  console.log("returnDate", returnDate)
 
   try {
     const result = await db.query(
@@ -84,7 +82,6 @@ export async function setRentalAsFinished(req, res) {
     )
     res.sendStatus(200)
   } catch (err) {
-    console.log(err)
     res.sendStatus(500)
   }
 }
@@ -94,12 +91,10 @@ export async function deleteRental(req, res) {
 
   try {
     const result = await db.query(`DELETE FROM rentals WHERE id = $1`, [id])
-    console.log(result)
 
     if (result.rowCount === 0) return res.sendStatus(404)
     res.sendStatus(200)
   } catch (err) {
-    console.log(err)
     res.sendStatus(500)
   }
 }
