@@ -88,7 +88,7 @@ export async function setSearchQueryObject(req, res, next) {
   games."categoryId", 
   categories.name AS "categoryName"
   FROM rentals
-  JOIN customers ON rentals."customerId" = customers.id
+  LEFT JOIN customers ON rentals."customerId" = customers.id
   JOIN games on rentals."gameId" = games.id
   JOIN categories on games."categoryId" = categories.id
   ${where}${statusText}
